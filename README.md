@@ -58,14 +58,14 @@ entropic-cosmic/
 graph TD
     User([사용자 요청]) --> Planner
     
-    subgraph Orchestrator [🎯 Orchestrator Team (기획/검수)]
+    subgraph Orchestrator ["🎯 Orchestrator Team (기획/검수)"]
         Planner[Planner (기획)]
         Reviewer[Reviewer (검수)]
     end
     
     Planner -->|분석 요청 및 지시| DataTeam
     
-    subgraph DataTeam [📊 Data Team (데이터 분석 - 병렬 실행)]
+    subgraph DataTeam ["📊 Data Team (데이터 분석 - 병렬 실행)"]
         direction LR
         Trend[Trend Analyst]
         Keyword[Keyword Researcher]
@@ -75,7 +75,7 @@ graph TD
     
     DataTeam -->|분석 결과 통합| ContentTeam
     
-    subgraph ContentTeam [✍️ Content Team (콘텐츠 제작 - 병렬 실행)]
+    subgraph ContentTeam ["✍️ Content Team (콘텐츠 제작 - 병렬 실행)"]
         direction LR
         Copywriter[Product Copywriter]
         Report[Report Generator]
