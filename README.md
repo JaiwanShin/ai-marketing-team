@@ -52,20 +52,20 @@ entropic-cosmic/
 └── dashboard.py                # 라이브 대시보드
 ```
 
-## 🏢 Team Structure (Organogram)
+## 🏢 팀 구조 (조직도)
 
 ```mermaid
 graph TD
-    User([User Request]) --> Planner
+    User([사용자 요청]) --> Planner
     
-    subgraph Orchestrator [🎯 Orchestrator Team]
-        Planner[Running: Planner]
-        Reviewer[Running: Reviewer]
+    subgraph Orchestrator [🎯 Orchestrator Team (기획/검수)]
+        Planner[Planner (기획)]
+        Reviewer[Reviewer (검수)]
     end
     
-    Planner -->|Analyzes Request| DataTeam
+    Planner -->|분석 요청 및 지시| DataTeam
     
-    subgraph DataTeam [📊 Data Team (Parallel Execution)]
+    subgraph DataTeam [📊 Data Team (데이터 분석 - 병렬 실행)]
         direction LR
         Trend[Trend Analyst]
         Keyword[Keyword Researcher]
@@ -73,16 +73,16 @@ graph TD
         Review[Review Analyst]
     end
     
-    DataTeam -->|Combined Data| ContentTeam
+    DataTeam -->|분석 결과 통합| ContentTeam
     
-    subgraph ContentTeam [✍️ Content Team (Parallel Execution)]
+    subgraph ContentTeam [✍️ Content Team (콘텐츠 제작 - 병렬 실행)]
         direction LR
         Copywriter[Product Copywriter]
         Report[Report Generator]
     end
     
-    ContentTeam -->|Drafts| Reviewer
-    Reviewer -->|Final Decision| UserApproval([User Approval])
+    ContentTeam -->|초안 작성| Reviewer
+    Reviewer -->|최종 승인 요청| UserApproval([사용자 승인])
     
     style Planner fill:#f9f,stroke:#333,stroke-width:2px
     style Reviewer fill:#f9f,stroke:#333,stroke-width:2px
