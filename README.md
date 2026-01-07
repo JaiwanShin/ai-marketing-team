@@ -52,17 +52,53 @@ entropic-cosmic/
 └── dashboard.py                # 라이브 대시보드
 ```
 
-## 팀 구성
+## 🏢 Team Structure (Organogram)
+
+```mermaid
+graph TD
+    User([User Request]) --> Planner
+    
+    subgraph Orchestrator [🎯 Orchestrator Team]
+        Planner[Running: Planner]
+        Reviewer[Running: Reviewer]
+    end
+    
+    Planner -->|Analyzes Request| DataTeam
+    
+    subgraph DataTeam [📊 Data Team (Parallel Execution)]
+        direction LR
+        Trend[Trend Analyst]
+        Keyword[Keyword Researcher]
+        Price[Price Monitor]
+        Review[Review Analyst]
+    end
+    
+    DataTeam -->|Combined Data| ContentTeam
+    
+    subgraph ContentTeam [✍️ Content Team (Parallel Execution)]
+        direction LR
+        Copywriter[Product Copywriter]
+        Report[Report Generator]
+    end
+    
+    ContentTeam -->|Drafts| Reviewer
+    Reviewer -->|Final Decision| UserApproval([User Approval])
+    
+    style Planner fill:#f9f,stroke:#333,stroke-width:2px
+    style Reviewer fill:#f9f,stroke:#333,stroke-width:2px
+    style DataTeam fill:#e1f5fe,stroke:#0277bd,stroke-width:2px
+    style ContentTeam fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+```
 
 | 팀 | 에이전트 | 역할 |
 |---|---|---|
 | Orchestrator | Planner | 기획 총괄, 작업 분배 |
-| Orchestrator | Reviewer | 품질 검수 |
+| Orchestrator | Reviewer | 품질 검수 (최종 승인) |
 | Data Team | Trend Analyst | 네이버 데이터랩 트렌드 분석 |
-| Data Team | Keyword Researcher | 검색광고 키워드 분석 |
-| Data Team | Price Monitor | 쇼핑 가격 모니터링 |
+| Data Team | Keyword Researcher | 검색광고 키워드 분석 (API) |
+| Data Team | Price Monitor | 쇼핑 가격 모니터링 (API) |
 | Data Team | Review Analyst | 리뷰/VOC 분석 |
-| Content Team | Product Copywriter | 상품명/설명 최적화 |
+| Content Team | Product Copywriter | 상품명/설명 최적화 (성분 기반) |
 | Content Team | Report Generator | 마케팅 리포트 생성 |
 
 ## 환경 변수
