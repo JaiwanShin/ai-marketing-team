@@ -56,38 +56,27 @@ entropic-cosmic/
 
 ```mermaid
 graph TD
-    User(["사용자 요청"]) --> Planner
+    A["사용자 요청"] --> B["Planner<br>기획 총괄"]
     
-    subgraph Orchestrator ["🎯 Orchestrator Team (기획/검수)"]
-        Planner["Planner (기획)"]
-        Reviewer["Reviewer (검수)"]
-    end
+    B --> C["Data Team<br>(병렬 실행)"]
+    C --> C1["Trend Analyst<br>데이터랩 추세"]
+    C --> C2["Keyword Researcher<br>검색광고 분석"]
+    C --> C3["Price Monitor<br>가격 모니터링"]
+    C --> C4["Review Analyst<br>리뷰/VOC 분석"]
     
-    Planner -->|분석 요청 및 지시| DataTeam
+    C1 & C2 & C3 & C4 --> D["Content Team<br>(병렬 실행)"]
+    D --> D1["Product Copywriter<br>상품 카피"]
+    D --> D2["Report Generator<br>분석 리포트"]
     
-    subgraph DataTeam ["📊 Data Team (데이터 분석 - 병렬 실행)"]
-        direction LR
-        Trend[Trend Analyst]
-        Keyword[Keyword Researcher]
-        Price[Price Monitor]
-        Review[Review Analyst]
-    end
+    D1 & D2 --> E["Reviewer<br>품질 검수 (최종 승인)"]
+    E --> F["최종 결과물 출력"]
     
-    DataTeam -->|분석 결과 통합| ContentTeam
-    
-    subgraph ContentTeam ["✍️ Content Team (콘텐츠 제작 - 병렬 실행)"]
-        direction LR
-        Copywriter[Product Copywriter]
-        Report[Report Generator]
-    end
-    
-    ContentTeam -->|초안 작성| Reviewer
-    Reviewer -->|최종 승인 요청| UserApproval(["사용자 승인"])
-    
-    style Planner fill:#f9f,stroke:#333,stroke-width:2px
-    style Reviewer fill:#f9f,stroke:#333,stroke-width:2px
-    style DataTeam fill:#e1f5fe,stroke:#0277bd,stroke-width:2px
-    style ContentTeam fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    style A fill:#fff,stroke:#333,stroke-width:2px
+    style B fill:#f9f,stroke:#333,stroke-width:2px
+    style C fill:#e1f5fe,stroke:#0277bd,stroke-width:2px
+    style D fill:#fff3e0,stroke:#ef6c00,stroke-width:2px
+    style E fill:#f9f,stroke:#333,stroke-width:2px
+    style F fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px
 ```
 
 | 팀 | 에이전트 | 역할 |
