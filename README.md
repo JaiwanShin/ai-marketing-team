@@ -56,11 +56,11 @@ entropic-cosmic/
 
 ```mermaid
 graph TD
-    User([사용자 요청]) --> Planner
+    User(["사용자 요청"]) --> Planner
     
     subgraph Orchestrator ["🎯 Orchestrator Team (기획/검수)"]
-        Planner[Planner (기획)]
-        Reviewer[Reviewer (검수)]
+        Planner["Planner (기획)"]
+        Reviewer["Reviewer (검수)"]
     end
     
     Planner -->|분석 요청 및 지시| DataTeam
@@ -82,7 +82,7 @@ graph TD
     end
     
     ContentTeam -->|초안 작성| Reviewer
-    Reviewer -->|최종 승인 요청| UserApproval([사용자 승인])
+    Reviewer -->|최종 승인 요청| UserApproval(["사용자 승인"])
     
     style Planner fill:#f9f,stroke:#333,stroke-width:2px
     style Reviewer fill:#f9f,stroke:#333,stroke-width:2px
