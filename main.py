@@ -126,38 +126,24 @@ class MarketingAgentTeam:
         logger.log("system", LogLevel.INFO, "🎯 워크플로우 시작")
         planner_result = self.run_agent("orchestrator", "planner", user_request)
         
-        # 2. Data Team (병렬 실행)
-        logger.log("system", LogLevel.INFO, "📊 Data Team 병렬 실행 시작")
+        # 2. Data Team (순차 실행)
+        logger.log("system", LogLevel.INFO, "📊 Data Team 순차 실행 시작")
         data_results = {}
         
-        def run_data_agent(agent):
+        for agent in self.agents.get("data_team", []):
             task = f"다음 분석 요청에 대해 작업해주세요:\n\n원본 요청: {user_request}\n\nPlanner 지시사항: {planner_result}"
-            return agent.name, self.run_agent("data_team", agent.name, task)
-        
-        from concurrent.futures import ThreadPoolExecutor, as_completed
-        
-        with ThreadPoolExecutor(max_workers=4) as executor:
-            futures = [executor.submit(run_data_agent, agent) for agent in self.agents.get("data_team", [])]
-            for future in as_completed(futures):
-                name, result = future.result()
-                data_results[name] = result
+            data_results[agent.name] = self.run_agent("data_team", agent.name, task)
         
         logger.log("system", LogLevel.INFO, "📊 Data Team 완료")
         
-        # 3. Content Team (병렬 실행)
-        logger.log("system", LogLevel.INFO, "✍️ Content Team 병렬 실행 시작")
+        # 3. Content Team (순차 실행)
+        logger.log("system", LogLevel.INFO, "✍️ Content Team 순차 실행 시작")
         content_results = {}
         combined_data = "\n\n---\n\n".join([f"## {k}\n{v}" for k, v in data_results.items()])
         
-        def run_content_agent(agent):
+        for agent in self.agents.get("content_team", []):
             task = f"다음 분석 결과를 바탕으로 콘텐츠를 생성해주세요:\n\n{combined_data}"
-            return agent.name, self.run_agent("content_team", agent.name, task)
-        
-        with ThreadPoolExecutor(max_workers=2) as executor:
-            futures = [executor.submit(run_content_agent, agent) for agent in self.agents.get("content_team", [])]
-            for future in as_completed(futures):
-                name, result = future.result()
-                content_results[name] = result
+            content_results[agent.name] = self.run_agent("content_team", agent.name, task)
         
         logger.log("system", LogLevel.INFO, "✍️ Content Team 완료")
         

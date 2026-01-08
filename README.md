@@ -58,13 +58,13 @@ entropic-cosmic/
 graph TD
     A["사용자 요청"] --> B["Planner<br>기획 총괄"]
     
-    B --> C["Data Team<br>(병렬 실행)"]
+    B --> C["Data Team<br>(순차 실행)"]
     C --> C1["Trend Analyst<br>데이터랩 추세"]
     C --> C2["Keyword Researcher<br>검색광고 분석"]
     C --> C3["Price Monitor<br>가격 모니터링"]
     C --> C4["Review Analyst<br>리뷰/VOC 분석"]
     
-    C1 & C2 & C3 & C4 --> D["Content Team<br>(병렬 실행)"]
+    C1 & C2 & C3 & C4 --> D["Content Team<br>(순차 실행)"]
     D --> D1["Product Copywriter<br>상품 카피"]
     D --> D2["Report Generator<br>분석 리포트"]
     
